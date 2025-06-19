@@ -1,4 +1,5 @@
-// Smooth scrolling for navigation links
+// This makes the page scroll smoothly when you click on links
+// (like when you click 'About' in the navbar)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener("click", function (e) {
     e.preventDefault();
@@ -61,7 +62,7 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// Intersection Observer for animations
+// This part makes the stats and timeline items fade in when you scroll to them
 const observerOptions = {
   threshold: 0.1,
   rootMargin: "0px 0px -50px 0px",
@@ -72,13 +73,13 @@ const observer = new IntersectionObserver(entries => {
     if (entry.isIntersecting) {
       entry.target.style.opacity = "1";
       entry.target.style.transform = "translateY(0)";
-      observer.unobserve(entry.target); // Only animate once
+      observer.unobserve(entry.target); // Only do this once per item
     }
   });
 }, observerOptions);
 
-// Observe elements for animation
-// Only observe .stat-item and .timeline-item (no skills, projects, contact)
+// Set up the fade-in for stat and timeline items
+// (they start hidden and slide up when you see them)
 document.querySelectorAll(".stat-item, .timeline-item").forEach(el => {
   el.style.opacity = "0";
   el.style.transform = "translateY(20px)";
@@ -86,7 +87,7 @@ document.querySelectorAll(".stat-item, .timeline-item").forEach(el => {
   observer.observe(el);
 });
 
-// Typing effect for hero subtitle
+// This makes the subtitle in the hero section look like it's being typed out
 const subtitle = document.querySelector(".subtitle");
 const text = subtitle.textContent;
 subtitle.textContent = "";
@@ -96,27 +97,27 @@ const typeWriter = () => {
   if (i < text.length) {
     subtitle.textContent += text.charAt(i);
     i++;
-    setTimeout(typeWriter, 100);
+    setTimeout(typeWriter, 100); // types one letter every 100ms
   }
 };
 
-// Start typing effect after page load
+// Start the typing effect after the page loads (waits 1 second)
 window.addEventListener("load", () => {
   setTimeout(typeWriter, 1000);
 });
 
-// Add loading animation
+// This just adds a 'loaded' class to the body when the page is ready
 window.addEventListener("load", () => {
   document.body.classList.add("loaded");
 });
 
-// Dynamic copyright year
+// This puts the current year and your name in the footer automatically
 const currentYear = new Date().getFullYear();
 document.querySelector(
   ".footer p"
 ).innerHTML = `&copy; ${currentYear} Samuel Adoleh. All rights reserved.`;
 
-// Add scroll indicator
+// This makes a little bar at the top that shows how much you've scrolled
 const createScrollIndicator = () => {
   const indicator = document.createElement("div");
   indicator.style.cssText = `
